@@ -45,10 +45,10 @@ export default function Results() {
               {results.Hotels &&
                 !!results.Hotels.length &&
                 results.Hotels.map((hotel, i) => {
-                  hotel.ScoreBookingCom = hotel.ScoreBookingCom.replace(
+                  hotel.ScoreBookingCom = hotel.ScoreBookingCom ? hotel.ScoreBookingCom.replace(
                     /,/g,
                     "."
-                  );
+                  ) : 0;
                   console.log(hotel);
                   return (
                     <li key={i} className="flex py-6 sm:py-10">
