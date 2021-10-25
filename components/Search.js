@@ -84,11 +84,9 @@ export default function Search({token}) {
                       address: String(destinationRef.current.value),
                       //   byStars,
                       latitude:
-                        geolocList[String(destinationRef.current.value)]
-                          .latitude || 48.856614,
+                        geolocList[String(destinationRef.current.value)] ? geolocList[String(destinationRef.current.value)].latitude : 48.856614,
                       longitude:
-                        geolocList[String(destinationRef.current.value)]
-                          .longitude || 2.3522219,
+                        geolocList[String(destinationRef.current.value)] ? geolocList[String(destinationRef.current.value)].longitude : 2.3522219,
                       agentDutyCode: process.env.NEXT_PUBLIC_AGENT_DUTY_CODE,
                       language: "FR",
                       currency: "EUR",
