@@ -236,7 +236,7 @@ export default function Search({token}) {
                     type="submit"
                     className="mt-3 w-full flex items-center justify-center px-5 py-3 border border-transparent shadow text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                   >
-                    {isSearching ?  <>Chargement<br/></> : <>C'est parti !<br/>✈️</>}
+                    {isSearching ?  <>Chargement<br/>...</> : <>C'est parti !<br/>✈️</>}
                   </button>
                 </div>
                 <div className="text-gray-200 relative flex items-start">
