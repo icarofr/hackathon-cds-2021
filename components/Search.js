@@ -53,7 +53,7 @@ export default function Search({token}) {
         >
           <div className="xl:w-0 xl:flex-1">
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-              Votre prochaine voyage
+              Votre prochain voyage
             </h2>
             <p
               className={`mt-3 max-w-3xl text-lg leading-6 ${
