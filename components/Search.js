@@ -8,7 +8,7 @@ import {
 import { useGreenify, useResults } from "./GlobalState";
 import { useRouter } from "next/router";
 
-export default function Search() {
+export default function Search({token}) {
   const now = new Date();
   const router = useRouter();
   const [rooms, setRooms] = useState(1);
@@ -20,6 +20,7 @@ export default function Search() {
   const [greenify] = useGreenify();
   const [geolocList, setGeolocList] = useState([]);
   const [results, setResults] = useResults();
+  const [isSearching, setSearching] = useState(false);
 
   function isNumeric(str) {
     if (typeof str != "string") return false;
@@ -29,7 +30,7 @@ export default function Search() {
   useEffect(() => {
     fetch("https://bookings.cdsgroupe.com/api-hackathon/v1/country", {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
@@ -67,6 +68,7 @@ export default function Search() {
               className="sm:flex flex-wrap"
               onSubmit={(e) => {
                 e.preventDefault();
+                setSearching(true);
                 fetch(
                   "https://bookings.cdsgroupe.com/api-HACKATHON/v1/hotelSearch?" +
                     new URLSearchParams({
@@ -95,13 +97,13 @@ export default function Search() {
                     }),
                   {
                     headers: {
-                      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+                      Authorization: `Bearer ${token}`,
                     },
                   }
                 )
                   .then((res) => res.json())
                   .then((result) => setResults(result))
-                  .then(() => router.push("/results"));
+                  .then(() => router.push("/results")).finally(() => setSearching(false));
               }}
             >
               <label htmlFor="destination" className="text-gray-300">
@@ -234,7 +236,7 @@ export default function Search() {
                     type="submit"
                     className="mt-3 w-full flex items-center justify-center px-5 py-3 border border-transparent shadow text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                   >
-                    C'est parti !<br />
+                    {isSearching ?  "Chargement..." : "C'est parti !"}<br />
                     ✈️
                   </button>
                 </div>
